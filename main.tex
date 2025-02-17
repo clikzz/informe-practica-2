@@ -37,6 +37,12 @@
   \renewcommand{\headrulewidth}{1pt}
 }
 
+\usepackage[table]{xcolor} % Para colores en tablas
+\usepackage{array} % Para mejorar alineación en tablas
+\usepackage{longtable} % Para tablas largas si es necesario
+\usepackage{multirow} % Para fusionar filas
+\usepackage{booktabs} % Para mejores líneas en la tabla
+
 % Paquete para modificar formato de títulos (titlesec)
 \usepackage{titlesec}
 % Ajustar el formato de capítulo: se reduce el espacio superior y se ajusta el tamaño del título
@@ -55,6 +61,7 @@
 % Paquete para bibliografía en formato APA (puede ajustarse o usar apacite, biblatex, etc.)
 \usepackage{apacite}
 \bibliographystyle{apacite}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -87,9 +94,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
 \newpage
-\listoftables  % Incluir si hay tablas en el informe
-\newpage
-\listoffigures % Incluir si hay figuras en el informe
+\listoffigures
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,15 +110,15 @@ Durante el período comprendido entre el 6 de enero y el 28 de febrero de 2025, 
 A través de esta experiencia, no solo se profundizó en la práctica del testing de software y la identificación de errores, sino que también se desarrollaron habilidades fundamentales en trabajo en equipo, comunicación efectiva y resolución de problemas dentro de un ambiente profesional. Este informe detalla el contexto de la empresa, las actividades realizadas, los resultados obtenidos y las conclusiones derivadas de la práctica, proporcionando una visión integral de los aprendizajes adquiridos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CAPÍTULO: Cuerpo del Informe
+% CAPÍTULO: Desarrollo de la Práctica
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Cuerpo del Informe}
+\chapter{Desarrollo de la Práctica}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sección: Descripción del Centro de Práctica
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Descripción del Centro de Práctica}
-
+Factoring Security S.A. es una empresa filial del Grupo Security, nace en 1992 para otorgar soluciones a los problemas de liquidez, cobranza, administración y financiamiento de sus clientes en forma ágil y oportuna.
 \begin{itemize}
     \item \textbf{Nombre o Razón Social:} Factoring Security S.A.
     \item \textbf{RUT:} 96.655.860-1
@@ -121,12 +126,33 @@ A través de esta experiencia, no solo se profundizó en la práctica del testin
     \item \textbf{Dirección Postal:} Av. Apoquindo 3150, Las Condes, Santiago.
     \item \textbf{Sitio Web:} https://www.factoringsecurity.cl/
     \item \textbf{Teléfono:} (41) 290 8050
+    \item \textbf{Área de Práctica:} Quality Assurance (QA)
     \item \textbf{Organigrama:} \begin{figure}[H]
       \centering
-      \includegraphics[width=10cm]{images/organigrama.png}
+      \includegraphics[width=14cm]{images/organigrama.png}
       \caption{Estructura Corporativa de Factoring Security}
     \end{figure}
-    \item \textbf{Área de Práctica:} Quality Assurance (QA)
+    \item \textbf{Objetivos:}
+    \begin{itemize}
+        \item Brindar soluciones financieras flexibles y adaptadas a las necesidades de liquidez de las pequeñas y medianas empresas.
+        \item Agilizar el proceso de aprobación de operaciones de factoring para garantizar una rápida disponibilidad de los recursos financieros.
+        \item Mantener altos estándares de calidad en el servicio al cliente, ofreciendo atención personalizada y satisfaciendo las necesidades de cada empresa.
+        \item Contribuir al crecimiento y desarrollo de las empresas a las que presta sus servicios, optimizando su flujo de caja y facilitando su operatividad.
+        \item Consolidar su posición en el mercado como una empresa líder en el sector de factoring, basada en la confianza, la transparencia y la eficiencia en sus operaciones.
+    \end{itemize}
+    \item \textbf{Misión:} Nuestra misión es entregar un servicio de excelencia. Queremos exceder las expectativas de nuestros clientes, para lograr un reconocimiento, lealtad y recomendaciones favorables en el mercado. Queremos motivar y desarrollar a nuestros empleados logrando un sentido de pertenencia en un contexto que concilie Trabajo y Familia.
+    \item \textbf{Visión:} Seremos la primera opción de Factoring en Chile, entregando un servicio ágil, flexible y eficiente, con soluciones integrales de liquidez y servicios de cobranza que garanticen altos niveles de fidelidad y satisfacción de nuestros clientes.
+    \item \textbf{Valores:} Los valores de Factoring Security S.A. son los siguientes:
+    \begin{itemize}
+      \item \textbf{Transparencia:} Actuar con honestidad, integridad y claridad en todas las operaciones y relaciones comerciales.
+      \item \textbf{Confianza:} Generar relaciones sólidas y duraderas con los clientes, basadas en la confianza mutua y el compromiso.
+      \item \textbf{Excelencia:} Buscar la mejore continua en la calidad de los servicios y la satisfacción del cliente.
+      \item \textbf{Respeto:} Valorar y respetar a todas las personas, clientes, colaboradores y socios comerciales.
+      \item \textbf{Responsabilidad:} Cumplir con los compromisos adquiridos y actuar de manera ética y responsable en todas las actividades de la empresa.
+      \item \textbf{Innovación:} Estar en constante búsqueda de nuevas soluciones y herramientas financieras para mejorar el servicio y adptarse a las necesidades del mercado.
+      \item \textbf{Colaboración:} Fomentar el trabajo en equipo y la colaboración entre los diferentes departamentos de la empresa para lograr los objetivos comunes.
+    \end{itemize}
+
 \end{itemize}
 
 \bigskip
@@ -187,35 +213,109 @@ La práctica profesional permitió adquirir experiencia real en el proceso de as
 
 Para la empresa, los beneficios fueron significativos, ya que la detección temprana de defectos redujo el impacto de errores en etapas avanzadas del desarrollo, optimizando tiempos y costos en la implementación de soluciones. Además, la documentación detallada de pruebas facilitó la trazabilidad de incidencias y permitió una gestión más eficiente de los problemas reportados.
 
-Desde el punto de vista personal, esta experiencia permitió reforzar conocimientos en **pruebas de software, detección y documentación de defectos, y gestión de calidad** en entornos corporativos. También se fortalecieron habilidades transversales como **trabajo en equipo, comunicación efectiva y resolución de problemas**, aspectos fundamentales para el desarrollo profesional en el área de ingeniería en informática.
+Desde el punto de vista personal, esta experiencia permitió reforzar conocimientos en \textbf{pruebas de software, detección y documentación de defectos, y gestión de calidad} en entornos corporativos. También se fortalecieron habilidades transversales como \textbf{trabajo en equipo, comunicación efectiva y resolución de problemas}, aspectos fundamentales para el desarrollo profesional en el área de ingeniería en informática.
 
-En conclusión, la práctica en **Factoring Security** representó una oportunidad valiosa para aplicar conocimientos adquiridos en la carrera y comprender de manera práctica la importancia del aseguramiento de calidad en proyectos tecnológicos dentro del sector financiero.
-
-
+En conclusión, la práctica en \textbf{Factoring Security} representó una oportunidad valiosa para aplicar conocimientos adquiridos en la carrera y comprender de manera práctica la importancia del aseguramiento de calidad en proyectos tecnológicos dentro del sector financiero.
 \bigskip
 
 \subsection{Bibliografía}
-La bibliografía debe ajustarse al formato APA. Inserte las referencias utilizadas en el cuerpo del informe, por ejemplo: \cite{ejemploReferencia}.
+Sobre Factoring Security | Factoring Security | Factoring Security. (n.d.). \url{https://www.factoringsecurity.cl/sobre-factoring-security}.
+
+Preguntas frecuentes | Factoring Security. (n.d.). \url{https://www.factoringsecurity.cl/preguntas-frecuentes}.
+
+Factoring Security. (2022). Memoria Integrada Factoring Security 2022. Recuperado de \url{https://www.factoringsecurity.cl/sites/factoring/files/reporte_integrado_factoring_security_2022.pdf}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CAPÍTULO: Anexos
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Anexos}
-Incluya en esta sección:
+Se adjuntan las evidencias de las tareas realizadas, fotografías de la oficina, pantallas de los sistemas utilizados, manuales y documentos consultados, y bitácoras de actividades. Las imagenes borrosas son por motivos de privacidad, no se pueden mostrar datos sensibles de la empresa.
 \begin{itemize}
-    \item Evidencias de las tareas realizadas.
-    \item Modelos.
-    \item Fotografías.
-    \item Pantallas.
-    \item Manuales y documentos.
-    \item Bitácora (obligatorio).
+    \item \textbf{Evidencias de las tareas realizadas:}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/evidenciatareasrealizadas/excel.png}
+      \caption{Registro de pruebas en Excel}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/evidenciatareasrealizadas/notion.png}
+      \caption{Seguimiento de evidencias en Notion}
+    \end{figure}
+    \item \textbf{Fotografías:}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/fotografias/oficina-2.jpeg}
+      \caption{Oficina de Factoring Security}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/fotografias/oficina-1.jpeg}
+      \caption{Área de trabajo en Factoring Security}
+    \end{figure}
+    \item \textbf{Pantallas:}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/teams.png}
+      \caption{Plataforma Microsoft Teams utilizada para reuniones y comunicación interna}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/azure-board.png}
+      \caption{Plataforma Microsoft Azure DevOps para gestión de tareas}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/azure-backlogs.png}
+      \caption{Plataforma Microsoft Azure DevOps para seguimiento de tareas y reporte de defectos}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/centralizacion-de-sistemas.png}
+      \caption{Centralización de sistemas en el proyecto de cambio de core}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/sistema-factoring.png}
+      \caption{Sistema de factoring para gestión de operaciones financieras}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/mantencion-procesos.png}
+      \caption{Sistema de mantención de procesos}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/mantencion-dolar.png}
+      \caption{Sistema de mantención de valores del dólar}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/nuevo-curse.png}
+      \caption{Sistema de gestión nuevos negocios}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/p360.png}
+      \caption{Plataforma 360 para centralización de información}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/pia.png}
+      \caption{Pizarra Integrada de Aprobación (PIA) para validación de operaciones}
+    \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/pantallas/pizarra-tesoreria.png}
+      \caption{Pizarra de Tesorería para control de operaciones financieras}
+    \end{figure}
+    \item \textbf{Manuales y documentos:}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=14cm]{images/manualesydocumentos/sharepoint.png}
+      \caption{Sharepoint con documentos y manuales de la empresa}
+    \end{figure}
+    \item \textbf{Bitácoras:}
+    Documento aparte, debo adjuntarlo una vez terminado.
 \end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bibliografía
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage
-\addcontentsline{toc}{chapter}{Bibliografía}
-\bibliography{bibliografia}
-
 \end{document}
